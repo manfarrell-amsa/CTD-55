@@ -520,7 +520,7 @@ let saveTimeout = null;
 async function saveData(key, value){
   try{
     showSaving();
-    await window.storage.set(key, JSON.stringify(value), false);
+    localStorage.setItem(key, JSON.stringify(value));
     showSaved();
   }catch(e){
     console.error('Storage error:', e);
@@ -530,8 +530,8 @@ async function saveData(key, value){
 
 async function loadData(key){
   try{
-    const r = await window.storage.get(key, false);
-    return r ? JSON.parse(r.value) : null;
+    const r = localStorage.getItem(key);
+    return r ? JSON.parse(r) : null;
   }catch(e){ return null; }
 }
 
